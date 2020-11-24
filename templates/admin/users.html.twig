@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Liste des users  {% endblock %}
+
+
+{% block body %}
+<h1> Liste des utilisateurs </h1>
+    
+    <thead>
+        <th> ID </th>
+        <th> ID </th>
+        <th> ID </th>
+        <th> ID </th>
+
+    </thead>
+
+    <tbody>
+    {% for user in users %}
+    <tr>
+        <td> {{ user.id}} </td>
+
+        <td> {{ user.username}} </td>
+        <td></td>
+        <td>{{ user.recette}}</td>
+        <td></td>
+
+
+    </tr>
+
+    {% else %}
+    <tr>
+    <td> pzs de user inscrit</td>
+    </tr>
+
+    </tbody>
+{% endblock %}
+
+
+
+

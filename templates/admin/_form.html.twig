@@ -1,0 +1,53 @@
+  {{ form_start(formRecette)}}
+
+  <div class="row">
+    <div class="col-md-4">
+     <!-- form_row pour afficher la ligne  -->
+        {{ form_row(formRecette.Titre) }}
+    </div> 
+
+    <div class="col-md-4">
+     <!-- form_row pour afficher la ligne  -->
+        {{ form_row(formRecette.categorie) }}
+    </div> 
+    <div class="col-md-4">
+     <!-- form_row pour afficher la ligne  -->
+        {{ form_row(formRecette.imageFile) }}
+    </div>  
+
+  </div> 
+   <div class="row">
+    <div class="col-md-6">
+     <!-- form_row pour afficher la ligne  -->
+        {{ form_row(formRecette.temps) }}
+    </div> 
+  </div> 
+   <div class="row">
+    <div class="col-md-6">
+     <!-- form_row pour afficher la ligne  -->
+        {{ form_row(formRecette.personne) }}
+    </div> 
+  </div>  
+   <div class="row">
+    <div class="col-md-12">
+     <!-- form_row pour afficher la ligne  -->
+        {{ form_row(formRecette.resumer) }}
+    </div> 
+  </div>  
+   <div class="row">
+    <div class="col-md-12">
+     <!-- form_row pour afficher la ligne  -->
+        {{ form_row(formRecette.preparation) }}
+    </div> 
+  </div>  
+
+  <div class="row">
+    <div class="col-md-12">
+    <!-- pour afficher le reste du formulaire en bas -->
+     {{form_rest(formRecette) }}
+    </div>
+  </div>
+        <input type="reset" class="btn btn-primary" value="Annuler">
+        <input type="submit" class="btn btn-success" value="Enregistrer">
+
+  {{ form_end(formRecette) }}

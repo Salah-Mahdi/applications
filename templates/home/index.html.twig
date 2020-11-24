@@ -1,0 +1,45 @@
+{% extends "base.html.twig" %}
+{% block title %}Home page!
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<h1>
+			Les recettes du chef salah
+		</h1>
+		<!-- affichage de message de succès d'envoi -->
+		{% for message in app.flashes('success') %}
+			<div class="alert alert-success">
+				{{ message }}
+
+			</div>
+
+		{% endfor %}
+		<div class="row mt-4">
+			{% for recette in recettes %}
+				<div class="col-md-4">
+					<div class="card" style="width: 18rem;">
+						{% if recette.imageName %}
+							<!--  src = source de l'image -->
+							<img src="{{ vich_uploader_asset(recette, 'imageFile') }}" class="card-img-top" alt="">
+						{% else %}
+							<img src="{{ asset('images/recettes/not_found.png') }}" class="card-img-top" alt="">
+
+
+						{% endif %}
+
+						<div class="card-body">
+							<h5 class="card-title">{{ recette.titre }}</h5>
+							<h6 class="card-subtitle mb-2 text-muted">{{ recette.createdAt|format_datetime() }}</h6>
+							<p class="card-text">{{ recette.resumer }}</p>
+							<a href="{{ path('recette_show', {id: recette.id}) }}" class="card-link btn btn-primary">Voir la recette
+							</a>
+
+						</div>
+					</div>
+				</div>
+
+			{% endfor %}
+		</div>
+	</div>
+{% endblock %}

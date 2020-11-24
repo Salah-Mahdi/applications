@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}Welcome!
+			{% endblock %}
+		</title>
+		<link
+		rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+		<!-- l'entrée pour le fichier css -->
+		{{ encore_entry_link_tags('app')}}
+		{% block stylesheets %}{% endblock %}
+	</head>
+	<body>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+			<a class="navbar-brand" href="{{ path('home_index') }}">Marfa cuisine
+			</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav mr-auto">
+
+					<li class="nav-item {% if menu is defined and menu == 'home' %} active {% endif %}">
+						<a class="nav-link" href="{{ path('home_index') }}">Home
+						</a>
+					</li>
+					<!-- menu contactez-nous -->
+					<li class="nav-item {% if menu is defined and menu == 'contact' %} active {% endif %}">
+						<a class="nav-link" href="{{ path('home_contact') }}">Contactez-nous
+						</a>
+					</li>
+					<!-- fin menu contactez-nous -->
+
+					<!-- lien pour proposer une recette par le user -->
+					{% if is_granted('ROLE_USER', app.user) %}
+						<li class="nav-item {% if menu is defined and menu == 'home' %} active {% endif %}">
+							<a class="nav-link" href="{{ path('user_create') }}">Proposer une recette
+							</a>
+						</li>
+					{% endif %}
+
+
+					<!-- si le user a le rôle admin ou super admin, on affiche ce lien "admin"-->
+					{% if is_granted('ROLE_ADMIN', app.user) %}
+						<li class="nav-item {% if menu is defined and menu == 'admin' %} active {% endif %}">
+							<a class="nav-link" href="{{ path('admin_index') }}">admin
+							</a>
+						</li>
+					{% endif %}
+
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							Nos cartes
+						</a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" href="#">qui sommes nous</a>
+							<a class="dropdown-item" href="#">nos offres</a>
+							<div class="dropdown-divider">Nos services</div>
+							<a class="dropdown-item" href="#">Nos client</a>
+						</div>
+					</li>
+
+				</ul>
+				<form class="form-inline my-2 my-lg-0">
+					<input class="form-control mr-sm-2" type="search" placeholder="Recherche" aria-label="Search">
+					<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Rechercher</button>
+				</form>
+				<!-- liens de connexion et de deconnexion -->
+				<ul class="navbar-nav">
+					{% if app.user %}
+						<li class="nav-item">
+							<a class="nav-link" href="{{ path('app_logout')}}">
+								Se deconnecter</a>
+						</li>
+					{% else %}
+						<li class="nav-item">
+							<a class="nav-link" href="{{ path('app_login')}}">
+								Se connecter</a>
+						</li>
+
+					{% endif %}
+				</ul>
+
+
+			</div>
+		</nav>
+
+
+		{% block body %}{% endblock %}
+
+		<!--  -->
+		{% block javascripts %}
+			<!-- import de la dependance javascript (entry)  -->
+			{{ encore_entry_script_tags('app')}}
+
+		{% endblock %}
+	</body>
+</html>

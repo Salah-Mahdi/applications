@@ -1,0 +1,48 @@
+{% extends "base.html.twig" %}
+
+
+{% block body %}
+
+	<div class="container">
+		<div class="jumbotron mt-3">
+			<h2>
+				{{recette.titre}}
+			</h2>
+		</div>
+
+
+		<div class="row mt-3">
+			<div class="col-md-3">
+				temps de preparation :
+				{{ recette.temps }}
+			</div>
+			<div class="col-md-3">
+				Pour :
+				{{ recette.personne }}
+				personne(s)
+			</div>
+
+			<div class="col-md-3"></div>
+
+		</div>
+		<div class="row mt-4">
+
+
+			<div class="col">
+				<div class="col-md-9">
+					Resumé de la preparation :
+					{{ recette.preparation }}
+				</div>
+			</div>
+			<div class="col-md-3"></div>
+			<div class="col-md-3">
+				Cette recette a été proposée par :
+				{{ recette.User.username }}
+
+			</div>
+
+
+		</div>
+	</div>
+
+{% endblock %}
