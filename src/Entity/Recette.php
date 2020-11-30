@@ -9,7 +9,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-
+use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 use DateTime;
 
 
@@ -17,6 +18,14 @@ use DateTime;
  * @ORM\Entity(repositoryClass=RecetteRepository::class)
  * @UniqueEntity("Titre")
  * @Vich\Uploadable
+ * @APIResource(
+ *      attributes={
+ *      "order"={"createdAt": "DESC"}
+ *      },
+ *      normalizationContext={"groups"={"read:recette"}},
+ *      collectionOperations={"get"},
+ *      itemOperations={"get"} 
+ * )
  */
 class Recette
 {
@@ -24,6 +33,7 @@ class Recette
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"read:recette"})
      */
     private $id;
 
@@ -36,35 +46,41 @@ class Recette
      *                minMessage="Le titre doit contenir au min {{ limit}} caractères",
      *                maxMessage="Le titre doit contenir au max {{ limit}} caractères"  
      * )
+     * @Groups({"read:recette"})
      */
     private $Titre;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message=" Le resumé ne doit pas être vide")
+     * @Groups({"read:recette"})
      */
     private $resumer;
 
     /**
      * @ORM\Column(type="text")
      * @Assert\NotBlank(message=" la préparation est obligatoire")
+     * @Groups({"read:recette"})
      */
     private $preparation;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="le temps est obligatoire")
+     * @Groups({"read:recette"})
      */
     private $temps;
 
     /**
      * @ORM\Column(type="integer")
      * message="Le nombre est obligatoire")
+     * @Groups({"read:recette"})
      */
     private $personne;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups({"read:recette"})
      */
     private $createdAt;
 

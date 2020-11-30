@@ -1,4 +1,5 @@
 api_platform:
+    title: 'API Cuisine de chef Salah'
     mapping:
         paths: ['%kernel.project_dir%/src/Entity']
     patch_formats:
